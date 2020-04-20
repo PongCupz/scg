@@ -14,11 +14,7 @@ class Doscg
 ################################################################################ 
 	function __construct($adapter) 
     {
-        //$this->id = $inID; 
         $this->adapter = $adapter;
-        //$this->perpage = 100;
-        //$this->page = $inPage;
-        //$this->pageStart = ($this->perpage*($this->page-1));
         $this->now = date('Y-m-d H:i');
         $this->ip = '';
         if (getenv('HTTP_CLIENT_IP'))
@@ -51,7 +47,6 @@ class Doscg
         }
     } 
 
-    ################################################################################ 
     function getLocation($src,$dsc)
     {
         $data = [];
@@ -71,6 +66,32 @@ class Doscg
         $data = $data->toArray();
         $return['dsc'] = $data;
         return $data;
+    }
+
+    function addLine($message)    
+    {
+        $sql = $this->adapter->query("INSERT INTO `line` (message, receive_date) VALUES ( '$message', now())");
+        return($sql->execute());
+    }
+
+    function getLine()
+    {
+        $data = [];
+        $sql = "select id,message,receive_date from line where receive_date <= DATE_SUB(now(), INTERVAL 10 SECOND) and noti = false";
+        $query = $this->adapter->query($sql);
+        $results = $query->execute();
+        $resultSet = new ResultSet;
+        $data = $resultSet->initialize($results); 
+        $data = $data->toArray();
+
+        return $data;
+    }
+
+    function updateLine($id)
+    {        
+        $data = [];
+        $sql = $this->adapter->query("update line set noti=true where id in (".implode(",",$id).")");
+        return($sql->execute());
     }
 }
     
