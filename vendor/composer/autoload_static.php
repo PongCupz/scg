@@ -445,6 +445,16 @@ class ComposerStaticInit0b410cc0ace1997da8cac296df5d8247
         ),
     );
 
+    public static $prefixesPsr0 = array (
+        'Z' => 
+        array (
+            'ZfrCors\\' => 
+            array (
+                0 => __DIR__ . '/..' . '/zfr/zfr-cors/src',
+            ),
+        ),
+    );
+
     public static $classMap = array (
         'PHPUnit\\Exception' => __DIR__ . '/..' . '/phpunit/phpunit/src/Exception.php',
         'PHPUnit\\Framework\\Assert' => __DIR__ . '/..' . '/phpunit/phpunit/src/Framework/Assert.php',
@@ -1036,6 +1046,7 @@ class ComposerStaticInit0b410cc0ace1997da8cac296df5d8247
         return \Closure::bind(function () use ($loader) {
             $loader->prefixLengthsPsr4 = ComposerStaticInit0b410cc0ace1997da8cac296df5d8247::$prefixLengthsPsr4;
             $loader->prefixDirsPsr4 = ComposerStaticInit0b410cc0ace1997da8cac296df5d8247::$prefixDirsPsr4;
+            $loader->prefixesPsr0 = ComposerStaticInit0b410cc0ace1997da8cac296df5d8247::$prefixesPsr0;
             $loader->classMap = ComposerStaticInit0b410cc0ace1997da8cac296df5d8247::$classMap;
 
         }, null, ClassLoader::class);

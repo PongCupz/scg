@@ -47,24 +47,15 @@ class Doscg
         }
     } 
 
-    function getLocation($src,$dsc)
+    function getLocation()
     {
         $data = [];
-        $sql = "SELECT id,name,lat,lng FROM location where name = '$src'";
+        $sql = "SELECT id,name,lat,lng FROM location";
         $query = $this->adapter->query($sql);
         $results = $query->execute();
         $resultSet = new ResultSet;
         $data = $resultSet->initialize($results); 
         $data = $data->toArray();
-        $return['src'] = $data;
-
-        $sql = "SELECT id,name,lat,lng FROM location where name = '$dsc'";
-        $query = $this->adapter->query($sql);
-        $results = $query->execute();
-        $resultSet = new ResultSet;
-        $data = $resultSet->initialize($results); 
-        $data = $data->toArray();
-        $return['dsc'] = $data;
         return $data;
     }
 

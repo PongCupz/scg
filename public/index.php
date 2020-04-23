@@ -1,6 +1,7 @@
 <?php
 try
 {  
+    
     set_time_limit(3600);
     $contentHeader = ob_get_contents();
     header("Content-Type: text/html; charset=utf-8");
@@ -10,9 +11,9 @@ try
     header($expire);
     #header('Content-Length: ' . strlen($contentHeader));
     header('Vary: Accept-Encoding');
-    header("Access-Control-Allow-Origin: *");
+    
     error_reporting(E_ALL|E_STRICT);
- 	ini_set('display_errors', '1');
+ 	ini_set('display_errors', '0');
 	date_default_timezone_set('Asia/Bangkok');
  	mb_internal_encoding("UTF-8");
     /**

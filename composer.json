@@ -1,6 +1,7 @@
 {
     "require": {
         "zendframework/zendframework": "^3.0",
-        "zendframework/zend-mvc": "^3.0"
+        "zendframework/zend-mvc": "^3.0",
+        "zfr/zfr-cors": "1.*"
     }
 }

@@ -53,8 +53,8 @@ class DoscgController extends AbstractActionController
             $json =  file_get_contents('php://input');
             $data = json_decode($json);
             $return = [];
-            foreach($data as $item){
-                if(is_string($item))
+            foreach($data->data as $item){
+                if(!is_numeric($item))
                     array_push($return,$item);
             }
             return new JsonModel($return);
@@ -71,9 +71,9 @@ class DoscgController extends AbstractActionController
         {
             $json =  file_get_contents('php://input');
             $data = json_decode($json);
-            $A = $data->A;
-            $B = $data->AB - $data->A;
-            $C = $data->AC - $data->A;
+            $A = $data->data->A;
+            $B = $data->data->AB - $data->data->A;
+            $C = $data->data->AC - $data->data->A;
             return new JsonModel(array('A' => $A,'B' => $B,'C' => $C));
         }
         catch( Exception $e )
@@ -86,10 +86,8 @@ class DoscgController extends AbstractActionController
     {
         try
         {
-            $json =  file_get_contents('php://input');
-            $data = json_decode($json);
             $models = new Doscg($this->adapter);
-            return new JsonModel($models->getLocation($data->src,$data->dsc));
+            return new JsonModel($models->getLocation());
         }
         catch( Exception $e )
         {
