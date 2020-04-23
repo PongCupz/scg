@@ -58,7 +58,7 @@ class LineController extends AbstractActionController
                 $LINEDatas['token'] = $models->getToken();
 
                 $results = $this->sentMessage($encodeJson,$LINEDatas);
-                if($datasReturn['result'] != 'S'){
+                if($results['result'] != 'S'){
                     $models->addLine($message);
                 }
             }else{
