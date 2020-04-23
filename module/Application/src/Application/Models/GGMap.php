@@ -8,9 +8,9 @@ use Zend\Cache\StorageFactory;
 use Zend\Cache\Storage\Adapter\Memcached;
 use Zend\Cache\Storage\StorageInterface;
  
-class Doscg
+class GGMap
 { 
-    protected $doscg; 
+    protected $ggmap; 
 ################################################################################ 
 	function __construct($adapter) 
     {
@@ -46,5 +46,17 @@ class Doscg
             $this->ip = 'UNKNOWN';
         }
     } 
+
+    function getLocation()
+    {
+        $data = [];
+        $sql = "SELECT id,name,lat,lng FROM location";
+        $query = $this->adapter->query($sql);
+        $results = $query->execute();
+        $resultSet = new ResultSet;
+        $data = $resultSet->initialize($results); 
+        $data = $data->toArray();
+        return $data;
+    }
 }
     

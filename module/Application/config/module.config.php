@@ -32,17 +32,36 @@ return array(
             'doscg' => array(
                 'type' => 'Segment',
                 'options' => array(
-                    'route'    => '/doscg/[:lang/[:action[/][:id/]]]',
+                    'route'    => '/doscg/[:action]',
                     'constraints' => array(
-                        'lang'   => '[a-zA-Z]*',
                         'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
-                        'id' => '[0-9_-]*[a-zA-Z0-9_-]*',
                     ),
                     'defaults' => array(
                         'controller' => 'Application\Controller\Doscg',
                         'action' => 'index',
-                        'id' => '',
-                        'lang' => 'th',
+                    ),
+                ),
+            ),
+            'ggmap' => array(
+                'type' => 'Segment',
+                'options' => array(
+                    'route'    => '/ggmap',
+                    'defaults' => array(
+                        'controller' => 'Application\Controller\GGMap',
+                        'action' => 'index',
+                    ),
+                ),
+            ),
+            'line' => array(
+                'type' => 'Segment',
+                'options' => array(
+                    'route'    => '/line/[:action]',
+                    'constraints' => array(
+                        'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
+                    ),
+                    'defaults' => array(
+                        'controller' => 'Application\Controller\Line',
+                        'action' => 'index',
                     ),
                 ),
             ),
@@ -72,6 +91,8 @@ return array(
             //add controller
             'Application\Controller\Index' => 'Application\Controller\IndexController',
             'Application\Controller\Doscg' => 'Application\Controller\DoscgController',
+            'Application\Controller\GGMap' => 'Application\Controller\GGMapController',
+            'Application\Controller\Line' => 'Application\Controller\LineController',
         ),
     ),
      

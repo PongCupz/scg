@@ -8,9 +8,9 @@ use Zend\Cache\StorageFactory;
 use Zend\Cache\Storage\Adapter\Memcached;
 use Zend\Cache\Storage\StorageInterface;
  
-class Doscg
+class Line
 { 
-    protected $doscg; 
+    protected $line; 
 ################################################################################ 
 	function __construct($adapter) 
     {
@@ -46,5 +46,36 @@ class Doscg
             $this->ip = 'UNKNOWN';
         }
     } 
+    
+    function addLine($message)    
+    {
+        $sql = $this->adapter->query("INSERT INTO `line` (message, receive_date) VALUES ( '$message', now())");
+        return($sql->execute());
+    }
+
+    function getLine()
+    {
+        $data = [];
+        $sql = "select id,message,receive_date from line where receive_date <= DATE_SUB(now(), INTERVAL 10 SECOND) and DATE(receive_date) = CURDATE()";
+        $query = $this->adapter->query($sql);
+        $results = $query->execute();
+        $resultSet = new ResultSet;
+        $data = $resultSet->initialize($results); 
+        $data = $data->toArray();
+
+        return $data;
+    }
+
+    function getToken()
+    {
+        $data = [];
+        $sql = "SELECT token FROM `line_token` WHERE 1";
+        $query = $this->adapter->query($sql);
+        $results = $query->execute();
+        $resultSet = new ResultSet;
+        $data = $resultSet->initialize($results); 
+        $data = $data->toArray();
+        return $data[0]['token'];
+    }
 }
     
