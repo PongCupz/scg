@@ -56,7 +56,7 @@ class Line
     function getLine()
     {
         $data = [];
-        $sql = "select id,message,receive_date from line where receive_date <= DATE_SUB(now(), INTERVAL 10 SECOND) and DATE(receive_date) = CURDATE()";
+        $sql = "select id,message,receive_date from line where receive_date <= DATE_SUB(now(), INTERVAL 10 SECOND) and DATE(receive_date) = CURDATE() order by receive_date desc";
         $query = $this->adapter->query($sql);
         $results = $query->execute();
         $resultSet = new ResultSet;
